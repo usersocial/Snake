@@ -1,21 +1,15 @@
-package com.games.snake;
+package com.games.snake.controllers;
 
 import java.io.*;
-import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Random;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
+import com.games.snake.models.enums.Key;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -117,7 +111,7 @@ public class Game extends Application implements GameScreen {
                     cell = (Rectangle)children.get(0);
                     cell.setWidth(cellSize - 1);
                     cell.setHeight(cellSize - 1);
-                    cell.setStroke(this.toFXColor(com.games.snake.Color.BLACK));
+                    cell.setStroke(this.toFXColor(com.games.snake.models.enums.Color.BLACK));
                 }
 
                 if (children.size() > 0) {
@@ -156,17 +150,17 @@ public class Game extends Application implements GameScreen {
 
     private void createScorePanel() {
         this.scoreText.setFont(Font.font("Verdana", FontWeight.BOLD, 16.0D));
-        this.scoreText.setFill(this.toFXColor(com.games.snake.Color.BLACK));
+        this.scoreText.setFill(this.toFXColor(com.games.snake.models.enums.Color.BLACK));
         StackPane scorePane = new StackPane(this.scoreText);
-        scorePane.setBorder(new Border(new BorderStroke(this.toFXColor(com.games.snake.Color.BLACK), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        scorePane.setBorder(new Border(new BorderStroke(this.toFXColor(com.games.snake.models.enums.Color.BLACK), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         scorePane.setLayoutY(this.height * cellSize - 550 + 6);
         int scoreHeight = 20;
         Rectangle rectangle;
         if (this.showGrid) {
-            rectangle = new Rectangle((this.width * cellSize - 1) / 2.0, scoreHeight, this.toFXColor(com.games.snake.Color.WHITE));
+            rectangle = new Rectangle((this.width * cellSize - 1) / 2.0, scoreHeight, this.toFXColor(com.games.snake.models.enums.Color.WHITE));
             scorePane.setLayoutX(125 + (this.width * cellSize - 1) / 4.0);
         } else {
-            rectangle = new Rectangle(this.width * cellSize / 2.0, scoreHeight, this.toFXColor(com.games.snake.Color.WHITE));
+            rectangle = new Rectangle(this.width * cellSize / 2.0, scoreHeight, this.toFXColor(com.games.snake.models.enums.Color.WHITE));
             scorePane.setLayoutX(124 + this.width * cellSize / 4.0);
         }
 
@@ -188,8 +182,8 @@ public class Game extends Application implements GameScreen {
 
     }
 
-    public void setCellColor(int x, int y, com.games.snake.Color color) {
-        if (color != null && color != com.games.snake.Color.NONE) {
+    public void setCellColor(int x, int y, com.games.snake.models.enums.Color color) {
+        if (color != null && color != com.games.snake.models.enums.Color.NONE) {
             ObservableList<Node> children = this.cells[y][x].getChildren();
             if (children.size() > 0 && !Color.valueOf(color.name()).equals(((Rectangle)children.get(0)).getFill())) {
                 ((Rectangle)children.get(0)).setFill(Color.valueOf(color.name()));
@@ -224,7 +218,7 @@ public class Game extends Application implements GameScreen {
         return children.size() > 1 ? ((Text)children.get(1)).getText() : "";
     }
 
-    public void setCellTextColor(int x, int y, com.games.snake.Color color) {
+    public void setCellTextColor(int x, int y, com.games.snake.models.enums.Color color) {
         ObservableList<Node> children = this.cells[y][x].getChildren();
         if (children.size() > 1) {
             Text text = (Text)children.get(1);
@@ -267,8 +261,8 @@ public class Game extends Application implements GameScreen {
     public void onTurn(int step) {
     }
 
-    private Color toFXColor(com.games.snake.Color color) {
-        if (color == com.games.snake.Color.NONE) {
+    private Color toFXColor(com.games.snake.models.enums.Color color) {
+        if (color == com.games.snake.models.enums.Color.NONE) {
             return Color.TRANSPARENT;
         } else {
             return color != null ? Color.valueOf(color.name()) : Color.BLACK;
@@ -287,22 +281,22 @@ public class Game extends Application implements GameScreen {
         }
     }
 
-    public void setCellValueEx(int x, int y, com.games.snake.Color cellColor, String value) {
+    public void setCellValueEx(int x, int y, com.games.snake.models.enums.Color cellColor, String value) {
         this.setCellValue(x, y, value);
         this.setCellColor(x, y, cellColor);
     }
 
-    public void setCellValueEx(int x, int y, com.games.snake.Color cellColor, String value, com.games.snake.Color textColor) {
+    public void setCellValueEx(int x, int y, com.games.snake.models.enums.Color cellColor, String value, com.games.snake.models.enums.Color textColor) {
         this.setCellValueEx(x, y, cellColor, value);
         this.setCellTextColor(x, y, textColor);
     }
 
-    public void setCellValueEx(int x, int y, com.games.snake.Color cellColor, String value, com.games.snake.Color textColor, int textSize) {
+    public void setCellValueEx(int x, int y, com.games.snake.models.enums.Color cellColor, String value, com.games.snake.models.enums.Color textColor, int textSize) {
         this.setCellValueEx(x, y, cellColor, value, textColor);
         this.setCellTextSize(x, y, textSize);
     }
 
-    public void showMessageDialog(com.games.snake.Color cellColor, String message, com.games.snake.Color textColor, int textSize) {
+    public void showMessageDialog(com.games.snake.models.enums.Color cellColor, String message, com.games.snake.models.enums.Color textColor, int textSize) {
         if (this.dialogContainer == null) {
             this.dialogContainer = new TextFlow();
             this.root.getChildren().add(this.dialogContainer);

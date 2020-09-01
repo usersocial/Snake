@@ -1,4 +1,7 @@
-package com.games.snake;
+package com.games.snake.controllers;
+
+import com.games.snake.models.enums.Color;
+import com.games.snake.models.enums.Key;
 
 public interface GameScreen {
     void setScreenSize(int var1, int var2);

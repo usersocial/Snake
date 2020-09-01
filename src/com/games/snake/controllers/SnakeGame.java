@@ -1,4 +1,10 @@
-package com.games.snake;
+package com.games.snake.controllers;
+
+import com.games.snake.models.Apple;
+import com.games.snake.models.Snake;
+import com.games.snake.models.enums.Color;
+import com.games.snake.models.enums.Direction;
+import com.games.snake.models.enums.Key;
 
 public class SnakeGame extends Game {
 

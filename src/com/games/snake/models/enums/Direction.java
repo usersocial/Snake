@@ -1,4 +1,4 @@
-package com.games.snake;
+package com.games.snake.models.enums;
 
 public enum Direction {
     UP,

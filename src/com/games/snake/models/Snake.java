@@ -1,4 +1,8 @@
-package com.games.snake;
+package com.games.snake.models;
+
+import com.games.snake.models.enums.Color;
+import com.games.snake.models.enums.Direction;
+import com.games.snake.controllers.Game;
 
 import java.util.ArrayList;
 import java.util.List;

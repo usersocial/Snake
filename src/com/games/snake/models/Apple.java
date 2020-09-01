@@ -1,6 +1,9 @@
-package com.games.snake;
+package com.games.snake.models;
 
-public class Apple extends GameObject{
+import com.games.snake.models.enums.Color;
+import com.games.snake.controllers.Game;
+
+public class Apple extends GameObject {
 
     private static final String APPLE_SIGN = "\uD83C\uDF4E";
 

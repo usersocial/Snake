@@ -1,4 +1,4 @@
-package com.games.snake;
+package com.games.snake.models;
 
 public class GameObject {
     public int x;
