@@ -99,9 +99,8 @@ public class Game extends Application implements GameScreen {
     }
 
     private Key getKey(KeyCode code) {
-        String keyName = Arrays.stream(Key.values()).map(Enum::name).filter((name) -> {
-            return code.name().equalsIgnoreCase(name);
-        }).findFirst().orElse(Key.UNKNOWN.name());
+        String keyName = Arrays.stream(Key.values()).map(Enum::name).filter((name) ->
+                code.name().equalsIgnoreCase(name)).findFirst().orElse(Key.UNKNOWN.name());
         return Key.valueOf(keyName);
     }
 
@@ -145,7 +144,7 @@ public class Game extends Application implements GameScreen {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        Image image = null;
+        Image image;
         if (inputStream != null) {
             image = new Image(inputStream);
             ImageView imageView = new ImageView(image);
@@ -160,15 +159,15 @@ public class Game extends Application implements GameScreen {
         this.scoreText.setFill(this.toFXColor(com.games.snake.Color.BLACK));
         StackPane scorePane = new StackPane(this.scoreText);
         scorePane.setBorder(new Border(new BorderStroke(this.toFXColor(com.games.snake.Color.BLACK), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        scorePane.setLayoutY(this.height * cellSize + 110 + 6);
+        scorePane.setLayoutY(this.height * cellSize - 550 + 6);
         int scoreHeight = 20;
         Rectangle rectangle;
         if (this.showGrid) {
-            rectangle = new Rectangle((this.width * cellSize - 1) / 2, scoreHeight, this.toFXColor(com.games.snake.Color.WHITE));
-            scorePane.setLayoutX(125 + (this.width * cellSize - 1) / 4);
+            rectangle = new Rectangle((this.width * cellSize - 1) / 2.0, scoreHeight, this.toFXColor(com.games.snake.Color.WHITE));
+            scorePane.setLayoutX(125 + (this.width * cellSize - 1) / 4.0);
         } else {
-            rectangle = new Rectangle(this.width * cellSize / 2, scoreHeight, this.toFXColor(com.games.snake.Color.WHITE));
-            scorePane.setLayoutX(124 + this.width * cellSize / 4);
+            rectangle = new Rectangle(this.width * cellSize / 2.0, scoreHeight, this.toFXColor(com.games.snake.Color.WHITE));
+            scorePane.setLayoutX(124 + this.width * cellSize / 4.0);
         }
 
         scorePane.getChildren().add(0, rectangle);
@@ -176,9 +175,9 @@ public class Game extends Application implements GameScreen {
     }
 
     public void setScreenSize(int width, int height) {
-        this.width = width < 3 ? 3 : (width > 100 ? 100 : width);
-        this.height = height < 3 ? 3 : (height > 100 ? 100 : height);
-        cellSize = 800 / this.width < 600 / this.height ? 800 / this.width : 600 / this.height;
+        this.width = width < 3 ? 3 : (Math.min(width, 100));
+        this.height = height < 3 ? 3 : (Math.min(height, 100));
+        cellSize = Math.min(800 / this.width, 600 / this.height);
         this.cells = new StackPane[this.height][this.width];
 
         for(int y = 0; y < this.height; ++y) {

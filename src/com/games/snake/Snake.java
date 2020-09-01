@@ -46,6 +46,11 @@ public class Snake {
         }
     }
 
+    /**
+     * первая проверка защищает от управления змеей в невозможном направлении(например, дана команда "направо", но она
+     * еще вертикальна, и пришла следующая "вверх"). Вторая проверка защищает от движения на 180 градусов
+     * @param direction
+     */
     public void setDirection(Direction direction) {
         switch (this.direction) {
             case LEFT:
